@@ -1,6 +1,6 @@
 # Inventory-Management-System
 These are the Inventory Management System files, <br> Submitted By- Daksh Bagga 
-👋 This was my First Project
+<br> <br> 👋 This was my First Project
 We have 2 Files
 
 ## Inventory.py 
