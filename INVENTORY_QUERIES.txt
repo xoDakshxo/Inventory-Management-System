@@ -1,0 +1,97 @@
+create database inventory;
+use inventory;
+CREATE TABLE PURCHASES(product_id varchar(20) not null primary key,product_name varchar(20),selling_rate int,purchase_rate int,purchase_date date, quantity int,expiry_date date,batch_id varchar(20));
+INSERT INTO PURCHASES VALUES('1122A','capacitor',20000, 10000,'14-12-19',300,'29-12-25','A121');
+INSERT INTO PURCHASES VALUES('1123B','resistor',21000, 12000,'13-01-18',310,'24-01-24','B122');
+INSERT INTO PURCHASES VALUES('1123C','resistor',15000, 8000,'11-10-19',150,'29-11-23','B123');
+INSERT INTO PURCHASES VALUES('1131D','M-F-JUMPER',2000, 1000,'05-03-17',500,'22-12-22','C182');
+INSERT INTO PURCHASES VALUES('1124D','F-F-JUMPER',20100, 10200,'14-11-19',320,'29-12-23','E213');
+SELECT * FROM PURCHASES;
+CREATE TABLE SUPPLIERS(supplier_id varchar(20) not null primary key, prodd_id varchar(20), foreign key(prodd_id) references PURCHASES(product_id), scontact varchar(20), booth_num int, street_name varchar(20), city varchar(20));
+INSERT INTO SUPPLIERS VALUES('111A','1122A','9874635462',1,'add1','chennai');
+INSERT INTO SUPPLIERS VALUES('112B','1123B','9878567465',2,'add2','Delhi');
+INSERT INTO SUPPLIERS VALUES('113C','1123C','9478567435',3,'add3','Goa');
+INSERT INTO SUPPLIERS VALUES('123D','1131D','8211443293',4,'add4','Mumbai');
+INSERT INTO SUPPLIERS VALUES('143E','1124D','7007847499',5,'add5','Delhi');
+SELECT * FROM SUPPLIERS;
+CREATE TABLE INVENTORIES(street_name varchar(30), city varchar(20), contact varchar(20), owner varchar(20));
+INSERT INTO INVENTORIES VALUES('addA', 'Delhi', '9656473645', 'owner1');
+INSERT INTO INVENTORIES VALUES('addB', 'Chennai', '8785746372', 'owner2');
+INSERT INTO INVENTORIES VALUES('addC', 'Mumbai', '6746573823', 'owner3');
+INSERT INTO INVENTORIES VALUES('addD', 'Allahabad', '8957463212', 'owner4');
+INSERT INTO INVENTORIES VALUES('addE', 'Goa','7856473623', 'owner5');
+SELECT * FROM INVENTORIES;
+CREATE TABLE imports_exports(sno int not null primary key, branch varchar(45), country varchar(45));
+desc imports_exports;
+insert into imports_exports values(290424, 'Tokyo', 'Japan');
+insert into imports_exports values(738465, 'Chennai', 'India');
+insert into imports_exports values(853462, 'California', 'USA');
+insert into imports_exports values(193846, 'London', 'UK');
+insert into imports_exports values(496453, 'Sydney', 'Australia');
+select * from imports_exports;
+select * from PURCHASES;
+
+create table travelAgency(prod_id varchar(20), foreign key (prod_id) references PURCHASES(product_id), 
+agency_name varchar(30), cost int(8),contact int(10));
+
+
+
+insert into travelAgency values('1131D', 'Happy travels', 124000, 984566323);
+insert into travelAgency values('1123C', 'AA travels', 290000, 674832709);
+insert into travelAgency values('1123B', 'marshall travels', 90000, 874645530);
+insert into travelAgency values('1122A', 'flybird travels', 545000, 967845329);
+insert into travelAgency values('1124D', 'hourglass travels', 320000, 957483625);
+
+create table sold_items(amnt int, soldQuantity int, prod_name varchar(30),
+idproduct varchar(30), foreign key (idproduct) references PURCHASES(product_id));
+
+insert into sold_items values(105000, 1, 'resistor', '1123C');
+insert into sold_items values(1130000, 2, 'capacitor', '1122A');
+insert into sold_items values(90000, 1, 'resistor', '1123C');
+insert into sold_items values(320000, 1, 'F-F-JUMPER', '1124D');
+insert into sold_items values(290000, 1, 'resistor', '1123C');
+desc travelAgency;
+desc sold_items;
+select * from sold_items;
+select * from travelAgency;
+desc WareHouse;
+create table WareHouse(aisle int, floor int, prods_id varchar(30),
+foreign key (prods_id) references PURCHASES(product_id));
+
+insert into WareHouse values(17, 1, '1123B');
+insert into WareHouse values(12, 2, '1122A');
+insert into WareHouse values(27, 2, '1131D');
+insert into WareHouse values(9, 3,  '1124D');
+insert into WareHouse values(3, 4,  '1123C');
+
+select * from WareHouse;
+select * from Employee;
+select * from Customers;
+
+select * from PURCHASES;
+select * from INVENTORIES;
+
+select * from sales;
+create table Customers(customer_id varchar(20) not null primary key,productid varchar(20), foreign key (productid) references purchases(product_id) ,firstname varchar(20),lastname varchar(20),contact int ,house_num int,street_name varchar(20),city varchar(20));
+insert into Customers values ('A51C','1122A','Akshat','Jain',967535476,34,'MG road', 'Chandigarh');
+insert into Customers values ('D33G','1123B','sunil','Jha',778964353,45,'mall road','Kota');
+insert into Customers values ('C11H','1123C','Khushi','Dutta',999987654,23,'park street','Kolkata');
+insert into Customers values ('A67E','1131D','Sanjay','bhasin',900886574,76,'linking road','Pune');
+insert into Customers values ('H97T','1124D','Riya','chauhan',899112335,21,'Arcot road','Chennai');
+select * from Customers;
+create table sales( Sale_id varchar(20) not null primary key,pro_id varchar(20), foreign key (pro_id) references purchases(product_id) , date_sale date, quantity int, amount int );
+insert into sales values ('S324','1122A','25-03-19',10,200000);
+insert into sales values ('S659','1123B','20-10-17',5,60000);
+insert into sales values ('S631','1123C','28-02-19',7,56000);
+insert into sales values ('S023','1131D','01-12-16',15,15000);
+insert into sales values ('S268','1124D','12-04-19',10,102000);
+select * from sales;
+create table Employee( Employee_id varchar(20) primary key, first_name varchar(20), Last_name varchar(20),House_no int,streetnm varchar(20),city varchar(20),contact int(10));
+insert into Employee values ('A123B','Sanyam','Sharma',47,'ashok vihar','New Delhi',954763273);
+insert into Employee values ('A654N','Kesav','Santosh',36,'SA road','Kochi',864900223);
+insert into Employee values ('9GHS7','Neha','Gupta',40,'Sohna road','Gurgaon',569202536);
+insert into Employee values ('2JKA9','Sonal','Das',54,'Yelahanka','Bangalore',958332782);
+insert into Employee values ('1QWE8','Hardik','Singh',78,'Ranjit Avenue','Amritsar',967850031);
+select * from Employee;
+use inventory;
+SELECT * FROM PURCHASES;
