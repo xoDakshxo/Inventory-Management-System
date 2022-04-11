@@ -1,5 +1,5 @@
 # Inventory-Management-System
-These are the Inventory Management System files, Submitted By- Daksh Bagga 
+These are the Inventory Management System files, <br> Submitted By- Daksh Bagga 
 👋 This was my First Project
 We have 2 Files
 
